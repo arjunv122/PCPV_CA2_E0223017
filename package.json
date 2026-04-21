@@ -1,0 +1,10 @@
+{
+  "name": "pcp-ca2",
+  "version": "1.0.0",
+  "description": "Project deployment",
+  "scripts": {
+    "dev": "echo 'Development mode'",
+    "build": "echo 'Build complete'",
+    "start": "echo 'Server running'"
+  }
+}
