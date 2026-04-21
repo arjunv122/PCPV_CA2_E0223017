@@ -1,0 +1,42 @@
+nav {
+  background-color: #333;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 0;
+  display: block;
+  transition: color 0.2s;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #007bff;
+}
+
+nav a.active {
+  color: #007bff;
+  border-bottom: 3px solid #007bff;
+}
+
+.main-layout {
+  min-height: 100vh;
+}
+
+.layout-content {
+  padding: 40px 20px;
+}
