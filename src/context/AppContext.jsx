@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import { appReducer, initialState } from '../reducer/AppReducer';
-import { getToken, getData } from '../api/api';
+import { getToken, getDataset, cleanOrder, isValidOrder } from '../api/api';
 
 export const AppContext = createContext();
 
@@ -9,24 +9,44 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const loadData = async () => {
-      dispatch({ type: 'SET_LOADING' });
       try {
-        // Step 1: Get token using credentials
-        const token = await getToken();
+        console.log('🚀 Starting data load process...')
+        dispatch({ type: 'SET_LOADING' });
         
-        // Step 2: Fetch data using token
-        const orders = await getData(token);
 
-        // Step 3: Store in global state
-        dispatch({ type: 'SET_ORDERS', payload: orders || [] });
+        const tokenRes = await getToken(
+          'E0223017',  
+          '351727',    
+          'setA'     
+        );
 
-        // Expose window.appState for testing
+      
+        const ordersData = await getDataset(tokenRes.token, tokenRes.dataUrl);
+        const rawOrders = Array.isArray(ordersData) ? ordersData : [];
+        const validOrders = rawOrders
+          .map((item, index) => cleanOrder(item, index))
+          .filter(isValidOrder);
+
+        dispatch({ type: 'SET_ORDERS', payload: validOrders });
+
+      
         window.appState = {
-          orders: orders || [],
+          orders: validOrders,
+          count: validOrders.length,
+          token: tokenRes.token?.substring(0, 20) + '...',
         };
+        
+        console.log(`🎉 Data load complete! ${validOrders.length}/${rawOrders.length} orders valid`)
       } catch (error) {
-        console.error('Failed to load data:', error);
-        dispatch({ type: 'SET_ERROR', payload: error.message });
+        console.error('💥 Failed to load data:', error);
+        dispatch({ type: 'SET_ERROR', payload: error.message || 'Failed to fetch data' });
+        
+       
+        window.appState = {
+          orders: [],
+          count: 0,
+          error: error.message,
+        };
       }
     };
 
