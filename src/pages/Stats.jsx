@@ -33,26 +33,9 @@ export default function Stats() {
     <div>
       <h1>Orders Analytics Dashboard</h1>
 
-      <div className="stats-grid">
-        <div className="stat-card">
-          <h3>Total Valid Orders</h3>
-          <div className="value" data-testid="total-orders">
-            {totalOrders}
-          </div>
-        </div>
-        <div className="stat-card">
-          <h3>Delivered Orders</h3>
-          <div className="value" data-testid="delivered-orders">
-            {deliveredOrders}
-          </div>
-        </div>
-        <div className="stat-card">
-          <h3>Cancelled Orders</h3>
-          <div className="value" data-testid="cancelled-orders">
-            {cancelledOrders}
-          </div>
-        </div>
-      </div>
+      <p data-testid="total-orders">{totalOrders}</p>
+      <p data-testid="delivered-orders">{deliveredOrders}</p>
+      <p data-testid="cancelled-orders">{cancelledOrders}</p>
 
       {state.loading && <p>Loading statistics...</p>}
       {state.error && <p style={{ color: 'red' }}>Error: {state.error}</p>}
