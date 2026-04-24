@@ -6,7 +6,7 @@ export default function OrderDetail() {
   const { id } = useParams();
   const { state, dispatch } = useContext(AppContext);
 
-  // Validate ID
+  
   const orderId = parseInt(id);
   if (isNaN(orderId)) {
     return (
@@ -32,7 +32,7 @@ export default function OrderDetail() {
     );
   }
 
-  // Calculate subtotal using reduce
+  
   const subtotal = (order.items || []).reduce((sum, item) => {
     return sum + (item?.price * item?.quantity || 0);
   }, 0);

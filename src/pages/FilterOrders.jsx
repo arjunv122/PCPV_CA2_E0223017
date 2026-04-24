@@ -7,9 +7,9 @@ export default function FilterOrders() {
   const [restaurantFilter, setRestaurantFilter] = useState('');
   const [error, setError] = useState('');
 
-  // Filter orders by restaurant (case-insensitive)
+ 
   const filteredOrders = (state.orders || []).filter(order => {
-    // First validate the order
+   
     if (!order?.orderId || !order?.customerName || !order?.restaurant || !order?.status) {
       return false;
     }

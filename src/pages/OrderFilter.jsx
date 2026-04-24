@@ -7,9 +7,8 @@ export default function FilterOrders() {
   const [restaurantFilter, setRestaurantFilter] = useState('');
   const [error, setError] = useState('');
 
-  // Filter orders by restaurant (case-insensitive)
+  
   const filteredOrders = (state.orders || []).filter(order => {
-    // First validate the order
     if (!order?.orderid || !order?.customerName || !order?.restaurant || !order?.status) {
       return false;
     }
@@ -27,7 +26,6 @@ export default function FilterOrders() {
     const value = e.target.value;
     setRestaurantFilter(value);
 
-    // Validation logic
     if (value && filteredOrders.length === 0) {
       setError('No results found');
     } else if (!value) {
