@@ -27,7 +27,7 @@ export default function Orders() {
                 to={`/order/${order?.orderId}`}
                 style={{ textDecoration: 'none' }}
               >
-                <div className="card" data-testid="order-item">
+                <div className="card">
                   <h3>Order #{order?.orderId}</h3>
                   <p><strong>Customer:</strong> {order?.customerName}</p>
                   <p><strong>Restaurant:</strong> {order?.restaurant}</p>
